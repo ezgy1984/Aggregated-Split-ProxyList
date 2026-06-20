@@ -1,29 +1,32 @@
-name: Daily Proxy Update
+name: Daily Proxy Update & High-Speed Test
 
 on:
   schedule:
-    # 5:00 утра по Москве — это 2:00 ночи по времени UTC (Greenwich)
+    # Запуск каждый день в 5:00 утра по Москве (2:00 ночи по UTC)
     - cron: '0 2 * * *'
-  workflow_dispatch: # Позволяет запускать скрипт вручную кнопкой
+  workflow_dispatch: # Позволяет запускать проверку вручную кнопкой в интерфейсе
 
 jobs:
-  run-script:
+  run-checker:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Python Environment
+        uses: actions/setup-python@v5.4.0
         with:
           python-version: '3.x'
 
-      - name: Run script
+      - name: Execute High-Speed Aggregator Script
+        # ДИРЕКТИВА ДЛЯ ВЫВОДА ЛОГОВ В РЕАЛЬНОМ ВРЕМЕНИ
+        env:
+          PYTHONUNBUFFERED: "1"
         run: python update_proxies.py
 
-      - name: Commit and Push changes
+      - name: Commit and Push Verified Subscriptions
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "GitHub Action Bot"
           git add *.txt
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update proxies $(date +'%Y-%m-%d')" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update verified proxies $(date +'%Y-%m-%d')" && git push)
