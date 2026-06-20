@@ -8,7 +8,7 @@ import os
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ИСТОЧНИКИ СТРОГО ЗАФИКСИРОВАНЫ И НЕ ИЗМЕНЯЮТСЯ
+# ИСТОЧНИКИ НАДЁЖНО ЗАФИКСИРОВАНЫ СТРОГО ИЗ ВАШЕГО PDF
 SOURCES = [
     "https://github.com/nikita29a/FreeProxyList/raw/refs/heads/main/mirror/1.txt",
     "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha-All-Type.txt",
@@ -16,17 +16,15 @@ SOURCES = [
     "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt"
 ]
 
-
 VALID_PROTOCOLS = {"ss", "ssr", "vless", "trojan", "hysteria", "hy2", "hysteria2", "tuic"}
 PROTOCOL_NAMES = {
     "ss": "SS", "ssr": "SSR", "vless": "Vless", "trojan": "Trojan",
     "hysteria": "Hysteria v1", "hysteria2": "Hy2", "hy2": "Hy2", "tuic": "Tuic"
 }
 
-TIMEOUT = 2.5  
-GLOBAL_MAX_WORKERS = 350  
-
-HOST_STATUS_CACHE = {}  
+TIMEOUT = 2.5 
+GLOBAL_MAX_WORKERS = 350 
+HOST_STATUS_CACHE = {} 
 host_cache_lock = threading.Lock()
 GLOBAL_WORKING_LIST = []
 global_working_lock = threading.Lock()
@@ -47,11 +45,7 @@ def fetch_source_data(url):
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=30) as response:
-            data = response.read().decode('utf-8', errors='ignore')
-            # ОПТИМИЗАЦИЯ: Принудительно добавляем перенос строки, чтобы базы не склеивались!
-            if data and not data.endswith('\n'):
-                data += '\n'
-            return data
+            return response.read().decode('utf-8', errors='ignore')
     except Exception as e:
         print(f" [!] Сбой загрузки источника {url}: ({e})")
         return ""
@@ -96,7 +90,6 @@ def test_single_proxy(config_str):
     with host_cache_lock:
         HOST_STATUS_CACHE[cache_key] = ping_result
     return ping_result, config_str
-
 def split_proxy_by_protocols():
     clear_old_files()
     print("\n1. Запуск парсера сторонних репозиториев...")
@@ -105,9 +98,22 @@ def split_proxy_by_protocols():
         print(f" -> Скачивание базы: {url}...")
         content = fetch_source_data(url)
         if content:
-            lines = content.splitlines()
-            all_lines.extend(lines)
-            print(f"    Получено строк: {len(lines)}")
+            for raw_line in content.splitlines():
+                cleaned = raw_line.strip()
+                if not cleaned: continue
+                
+                # ТОЧЕЧНОЕ ИСПРАВЛЕНИЕ: Разрезаем строго на стыках вида "=vless://" или "=ssr://"
+                # Это гарантирует, что оригинальные UUID-ключи VLESS внутри ссылки не изменятся
+                if "=vless://" in cleaned:
+                    cleaned = cleaned.replace("=vless://", "=\nvless://")
+                if "=ssr://" in cleaned:
+                    cleaned = cleaned.replace("=ssr://", "=\nssr://")
+                if "=trojan://" in cleaned:
+                    cleaned = cleaned.replace("=trojan://", "=\ntrojan://")
+                        
+                for split_line in cleaned.split("\n"):
+                    if split_line.strip():
+                        all_lines.append(split_line.strip())
 
     print(f"\nВсего собрано строк для анализа: {len(all_lines)}")
     raw_categorized = collections.defaultdict(list)
@@ -115,13 +121,10 @@ def split_proxy_by_protocols():
         cleaned_line = line.strip()
         if not cleaned_line or "://" not in cleaned_line: continue
         try:
-            # ИСПРАВЛЕНО И ПРОВЕРЕНО В ИНТЕРПРЕТАТОРЕ: берем нулевой строковый элемент строго до .strip()
-            parts = cleaned_line.split("://")
-            protocol = parts[0].strip().lower()
-            
+            # СТРОГО ВАШ БАЗОВЫЙ АЛГОРИТМ ИЗ ВАШЕГО PDF
+            protocol = cleaned_line.split("://")[0].strip().lower()
             if protocol in VALID_PROTOCOLS:
                 target_protocol = "hy2" if protocol in ["hy2", "hysteria2"] else protocol
-                # Сохраняем строку только если она начинается на правильный протокол
                 raw_categorized[target_protocol].append(cleaned_line)
         except Exception:
             continue
@@ -153,7 +156,7 @@ def split_proxy_by_protocols():
                     log_lines = []
                     for proto, p_data in stats.items():
                         if not p_data["finished"] and p_data["total"] > 0:
-                            log_lines.append(f"{proto.upper()}: {p_data['tested']}/{p_data['total']}")
+                            log_lines.append(f"{proto.upper()}: {p_data['tested']}\\{p_data['total']}")
                     if log_lines:
                         sys.stdout.write(" -> Прогресс " + " | ".join(log_lines) + "\n")
                         sys.stdout.flush()
@@ -167,6 +170,7 @@ def split_proxy_by_protocols():
         with global_working_lock:
             GLOBAL_WORKING_LIST.extend(p_data["working"])
             
+        # СТРОГО ВАША СОРТИРОВКА ИЗ PDF
         sorted_working_tuples = sorted(p_data["working"], key=lambda x: x[0])
         sorted_working_strings = [item[1] for item in sorted_working_tuples]
         
@@ -178,7 +182,7 @@ def split_proxy_by_protocols():
             lines_to_write = [f"#profile-title: Nikita29a | {title_tag}", f"#profile-update-interval: 24", ""] + data_list
             with open(filename, "w", encoding="utf-8") as f:
                 f.write("\n".join(lines_to_write) + "\n")
-        sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых (отсортировано): {len(sorted_working_strings)}/{p_data['total']} -> Файлы на диске.\n")
+        sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых (отсортировано): {len(sorted_working_strings)}\\{p_data['total']} -> Файлы на диске.\n")
         sys.stdout.flush()
 
     interleaved_tasks = []
@@ -186,8 +190,10 @@ def split_proxy_by_protocols():
     while temp_groups:
         active_protos = list(temp_groups.keys())
         for proto in active_protos:
-            if temp_groups[proto]: interleaved_tasks.append((temp_groups[proto].pop(0), proto))
-            else: del temp_groups[proto]
+            if temp_groups[proto]: 
+                interleaved_tasks.append((temp_groups[proto].pop(0), proto))
+            else: 
+                del temp_groups[proto]
 
     with ThreadPoolExecutor(max_workers=GLOBAL_MAX_WORKERS) as global_executor:
         future_to_proto = {global_executor.submit(test_single_proxy, c): p for c, p in interleaved_tasks}
