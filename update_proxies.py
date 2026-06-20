@@ -8,19 +8,12 @@ import os
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ИСТОЧНИКИ НАДЁЖНО ЗАФИКСИРОВАНЫ В HEX С КОММЕНТАРИЯМИ
-HEX_SOURCES = [
-    # https : // github.com / nikita29a / FreeProxyList / raw / refs / heads / main / mirror / 1.txt
-    "68747470733a2f2f6769746875622e636f6d2f6e696b6974613239612f4672656550726f78794c6973742f7261772f726566732f68656164732f6d61696e2f6d6972726f722f312e747874",
-    
-    # https : // raw.githubusercontent.com / ebrasha / free-v2ray-public-list / refs / heads / main / V2Ray-Config-By-EbraSha-All-Type.txt
-    "68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f656272617368612f667265652d76327261792d7075626c69632d6c6973742f726566732f68656164732f6d61696e2f56325261792d436f6e6669672d42792d456272615368612d416c6c2d547970652e747874",
-    
-    # https : // raw.githubusercontent.com / MatinGhanbari / v2ray-configs / main / subscriptions / v2ray / all_sub.txt
-    "68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f4d6174696e4768616e626172692f76327261792d636f6e666967732f6d61696e2f737562736372697074696f6e732f76327261792f616c6c5f7375622e747874",
-    
-    # https : // raw.githubusercontent.com / whoahaow / rjsxrd / refs / heads / main / githubmirror / bypass / bypass-all.txt
-    "68747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f77686f6168616f772f726a737872642f726566732f68656164732f6d61696e2f67697468616d6972726f722f6279706173732f6279706173732d616c6c2e747874"
+# ИСТОЧНИКИ НАДЁЖНО ЗАФИКСИРОВАНЫ
+SOURCES = [
+    "https://github.com/nikita29a/FreeProxyList/raw/refs/heads/main/mirror/1.txt",
+    "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha-All-Type.txt",
+    "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/all_sub.txt",
+    "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt"
 ]
 
 VALID_PROTOCOLS = {"ss", "ssr", "vless", "trojan", "hysteria", "hy2", "hysteria2", "tuic"}
@@ -49,14 +42,13 @@ def clear_old_files():
                 except Exception: pass
     print(f" -> Стерто старых файлов подписок: {deleted_count}")
 
-def fetch_source_data(hex_url):
+def fetch_source_data(url):
     try:
-        url = bytes.fromhex(hex_url).decode('utf-8')
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=30) as response:
             return response.read().decode('utf-8', errors='ignore')
     except Exception as e:
-        print(f" [!] Сбой загрузки источника: ({e})")
+        print(f" [!] Сбой загрузки источника {url}: ({e})")
         return ""
 
 def parse_host_port(config_str):
@@ -76,11 +68,12 @@ def parse_host_port(config_str):
 
 def test_host_socket(host, port):
     sock = None
+    start_time = time.time()
     try:
         sock = socket.create_connection((host, port), timeout=TIMEOUT)
-        return True
+        return int((time.time() - start_time) * 1000)
     except Exception:
-        return False
+        return None
     finally:
         if sock:
             try: sock.shutdown(socket.SHUT_RDWR); sock.close()
@@ -88,25 +81,23 @@ def test_host_socket(host, port):
 
 def test_single_proxy(config_str):
     parsed = parse_host_port(config_str)
-    if not parsed: return False, config_str
+    if not parsed: return None, config_str
     host, port = parsed
     cache_key = f"{host}:{port}"
     with host_cache_lock:
         if cache_key in HOST_STATUS_CACHE:
             return HOST_STATUS_CACHE[cache_key], config_str
-    is_working = test_host_socket(host, port)
+    ping_result = test_host_socket(host, port)
     with host_cache_lock:
-        HOST_STATUS_CACHE[cache_key] = is_working
-    return is_working, config_str
-
+        HOST_STATUS_CACHE[cache_key] = ping_result
+    return ping_result, config_str
 def split_proxy_by_protocols():
     clear_old_files()
     print("\n1. Запуск парсера сторонних репозиториев...")
     all_lines = []
-    for hex_url in HEX_SOURCES:
-        decoded_url = bytes.fromhex(hex_url).decode('utf-8')
-        print(f" -> Скачивание базы: {decoded_url}...")
-        content = fetch_source_data(hex_url)
+    for url in SOURCES:
+        print(f" -> Скачивание базы: {url}...")
+        content = fetch_source_data(url)
         if content:
             lines = content.splitlines()
             all_lines.extend(lines)
@@ -118,7 +109,7 @@ def split_proxy_by_protocols():
         cleaned_line = line.strip()
         if not cleaned_line or "://" not in cleaned_line: continue
         try:
-            # СТРОГО ЗАКРЕПЛЕНО: извлечение имени протокола через индекс 0
+            # Исправленное извлечение протокола
             protocol = cleaned_line.split("://")[0].strip().lower()
             if protocol in VALID_PROTOCOLS:
                 target_protocol = "hy2" if protocol in ["hy2", "hysteria2"] else protocol
@@ -130,9 +121,9 @@ def split_proxy_by_protocols():
     for proto, configs in raw_categorized.items():
         protocol_groups[proto] = list(set(configs))
 
-    print(f"\n2. Старт ОДНОВРЕМЕННОГО тестирования в общем пуле ({GLOBAL_MAX_WORKERS} потоков)...")
+    print(f"\n2. Старт ОДНОВРЕМЕННОГО тестирования и сортировки по пингу ({GLOBAL_MAX_WORKERS} потоков)...")
     if len(protocol_groups) == 0:
-        print(" -> Файлы не созданы: не найдено подходящих ключей.")
+        print(" -> Файлы не созданы: не найдено подходящих ключей после парсинга.")
         return
 
     progress_lock = threading.Lock()
@@ -166,36 +157,43 @@ def split_proxy_by_protocols():
         p_data = stats[protocol]
         with global_working_lock:
             GLOBAL_WORKING_LIST.extend(p_data["working"])
+            
+        # Сортируем строго по первому элементу кортежа x (значение пинга)
+        sorted_working_tuples = sorted(p_data["working"], key=lambda x: x[0])
+        sorted_working_strings = [item[1] for item in sorted_working_tuples]
+        
         display_name = PROTOCOL_NAMES.get(protocol, protocol.upper())
-        for suffix, data_list in [("", p_data["full_list"]), ("_working", p_data["working"])]:
+        for suffix, data_list in [("", p_data["full_list"]), ("_working", sorted_working_strings)]:
             if not data_list: continue
             filename = f"{protocol}{suffix}.txt"
-            title_tag = f"Aggregated {display_name}" if suffix == "" else f"Verified Working {display_name}"
+            title_tag = f"Aggregated {display_name}" if suffix == "" else f"Sorted By Ping {display_name}"
             lines_to_write = [f"#profile-title: Nikita29a | {title_tag}", f"#profile-update-interval: 24", ""] + data_list
             with open(filename, "w", encoding="utf-8") as f:
                 f.write("\n".join(lines_to_write) + "\n")
-        sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых: {len(p_data['working'])}\\{p_data['total']} -> Файлы на диске.\n")
+        sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых (отсортировано): {len(sorted_working_strings)}\\{p_data['total']} -> Файлы на диске.\n")
         sys.stdout.flush()
 
-    # ПОЛНОСТЬЮ ВОССТАНОВЛЕННАЯ КАРУСЕЛЬ ROUND-ROBIN
+    # ИСПРАВЛЕНО: Теперь кортеж карусели формируется правильно: (строка_ссылки, имя_протокола)
     interleaved_tasks = []
     temp_groups = {proto: list(configs) for proto, configs in protocol_groups.items()}
     while temp_groups:
         active_protos = list(temp_groups.keys())
         for proto in active_protos:
-            if temp_groups[proto]:
+            if temp_groups[proto]: 
                 interleaved_tasks.append((temp_groups[proto].pop(0), proto))
-            else:
+            else: 
                 del temp_groups[proto]
 
     with ThreadPoolExecutor(max_workers=GLOBAL_MAX_WORKERS) as global_executor:
+        # ИСПРАВЛЕНО: Распаковка c = ссылка, p = протокол теперь полностью совпадает с каруселью
         future_to_proto = {global_executor.submit(test_single_proxy, c): p for c, p in interleaved_tasks}
         for future in as_completed(future_to_proto):
             proto = future_to_proto[future]
-            is_working, config_str = future.result()
+            ping_ms, config_str = future.result()
             with progress_lock:
                 stats[proto]["tested"] += 1
-                if is_working: stats[proto]["working"].append(config_str)
+                if ping_ms is not None: 
+                    stats[proto]["working"].append((ping_ms, config_str))
                 if stats[proto]["tested"] == stats[proto]["total"] and not stats[proto]["finished"]:
                     stats[proto]["finished"] = True
                     save_protocol_files(proto)
@@ -203,16 +201,20 @@ def split_proxy_by_protocols():
     stop_logging = True
     logger_actor.join()
 
-    print("\n3. Создание общего объединенного списка...")
+    print("\n3. Создание общего объединенного списка с глобальной сортировкой...")
     if GLOBAL_WORKING_LIST:
         filename = "all_working.txt"
-        lines_to_write = [f"#profile-title: Nikita29a | Verified Working All Protocols", f"#profile-update-interval: 24", ""] + GLOBAL_WORKING_LIST
+        # Сортируем глобальный мега-список по значению пинга
+        global_sorted_tuples = sorted(GLOBAL_WORKING_LIST, key=lambda x: x[0])
+        global_sorted_strings = [item[1] for item in global_sorted_tuples]
+        
+        lines_to_write = [f"#profile-title: Nikita29a | Verified Working All Protocols", f"#profile-update-interval: 24", ""] + global_sorted_strings
         with open(filename, "w", encoding="utf-8") as f:
             f.write("\n".join(lines_to_write) + "\n")
-        print(f" -> [Диск] Успешно создан общий файл: {filename} (всего живых серверов: {len(GLOBAL_WORKING_LIST)})")
+        print(f" -> [Диск] Успешно создан общий файл: {filename} (всего живых серверов: {len(global_sorted_strings)})")
     else:
         print(" -> Общий файл не создан: живые прокси отсутствуют.")
-    print("\n[Успех] Агрегатор, чекер и сборщик мега-списка полностью завершили работу!")
+    print("\n[Успех] Агрегатор, чекер и скоростной сортировщик мега-списка полностью завершили работу!")
 
 if __name__ == "__main__":
     split_proxy_by_protocols()
