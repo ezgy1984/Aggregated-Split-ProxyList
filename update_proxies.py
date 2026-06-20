@@ -3,7 +3,7 @@ import collections
 import base64
 import os
 
-# Прямая ссылка на сырой текстовый файл в репозитории nikita29a
+# ИСХОДНЫЙ URL ЗАМЕНЕН ПО ВАШЕМУ ЗАПРОСУ
 URL = "https://github.com/nikita29a/FreeProxyList/raw/refs/heads/main/mirror/1.txt"
 
 # Белый список протоколов (Vmess намеренно исключен)
@@ -60,17 +60,19 @@ def split_proxy_by_protocols():
         
         if "://" in cleaned_line:
             try:
-                # Исправленный парсинг: извлекаем левую часть до :// и переводим в нижний регистр
+                # ИСПРАВЛЕНО: берем [0] элемент из списка split, а затем переводим в .lower()
                 protocol = cleaned_line.split("://")[0].lower()
                 
                 # Берем только протоколы из разрешенного списка
                 if protocol in VALID_PROTOCOLS:
-                    categorized_proxies[protocol].append(cleaned_line)
+                    # Кодируем каждую ССЫЛКУ в Base64 отдельно
+                    link_bytes = cleaned_line.encode('utf-8')
+                    encoded_link = base64.b64encode(link_bytes).decode('utf-8')
+                    categorized_proxies[protocol].append(encoded_link)
             except Exception:
                 continue
 
-    # Сохранение результатов в отдельные .txt файлы
-    print("\n2. Сохранение и кодирование файлов в Base64 для Hiddify:")
+    print("\n2. Сохранение новых файлов в формате Codeberg/Hiddify:")
     
     if not categorized_proxies:
         print(" -> Файлы не созданы: в скачанном тексте не обнаружено подходящих протоколов.")
@@ -80,20 +82,20 @@ def split_proxy_by_protocols():
         display_name = PROTOCOL_NAMES.get(protocol, protocol.upper())
         filename = f"{protocol}.txt"
         
-        # Формируем исходный открытый текст с вашим заголовком
-        header = f"# profile-title: Nikita29a | {display_name}"
-        raw_content = header + "\n" + "\n".join(configs) + "\n"
+        # Спецификация формата Hiddify: открытые заголовки без лишних пробелов
+        lines_to_write = [
+            f"#profile-title: Nikita29a | {display_name}",
+            f"#profile-update-interval: 24",
+            "" # Пустая строка для правильного разделения структуры
+        ] + configs
         
-        # Переводим открытый текст в строку Base64 для 100% совместимости с Hiddify
-        bytes_content = raw_content.encode('utf-8')
-        base64_content = base64.b64encode(bytes_content).decode('utf-8')
+        file_content = "\n".join(lines_to_write) + "\n"
         
         with open(filename, "w", encoding="utf-8") as f:
-            f.write(base64_content)
-            
+            f.write(file_content)
         print(f" -> Создан файл: {os.path.abspath(filename)} (конфигураций: {len(configs)})")
 
-    print("\nРазделение успешно завершено! Все файлы зашифрованы в Base64 и готовы для Hiddify.")
+    print("\nРазделение успешно завершено! Формат полностью совместим с Hiddify.")
 
 if __name__ == "__main__":
     split_proxy_by_protocols()
