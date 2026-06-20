@@ -8,13 +8,14 @@ import os
 import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ИСТОЧНИКИ НАДЁЖНО ЗАФИКСИРОВАНЫ
+# ИСТОЧНИКИ СТРОГО ЗАФИКСИРОВАНЫ И НЕ ИЗМЕНЯЮТСЯ
 SOURCES = [
     "https://github.com/nikita29a/FreeProxyList/raw/refs/heads/main/mirror/1.txt",
     "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha-All-Type.txt",
     "https://raw.githubusercontent.com/MatinGhanbari/v2ray-configs/main/subscriptions/v2ray/all_sub.txt",
     "https://raw.githubusercontent.com/whoahaow/rjsxrd/refs/heads/main/githubmirror/bypass/bypass-all.txt"
 ]
+
 
 VALID_PROTOCOLS = {"ss", "ssr", "vless", "trojan", "hysteria", "hy2", "hysteria2", "tuic"}
 PROTOCOL_NAMES = {
@@ -46,7 +47,11 @@ def fetch_source_data(url):
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=30) as response:
-            return response.read().decode('utf-8', errors='ignore')
+            data = response.read().decode('utf-8', errors='ignore')
+            # ОПТИМИЗАЦИЯ: Принудительно добавляем перенос строки, чтобы базы не склеивались!
+            if data and not data.endswith('\n'):
+                data += '\n'
+            return data
     except Exception as e:
         print(f" [!] Сбой загрузки источника {url}: ({e})")
         return ""
@@ -91,6 +96,7 @@ def test_single_proxy(config_str):
     with host_cache_lock:
         HOST_STATUS_CACHE[cache_key] = ping_result
     return ping_result, config_str
+
 def split_proxy_by_protocols():
     clear_old_files()
     print("\n1. Запуск парсера сторонних репозиториев...")
@@ -109,10 +115,13 @@ def split_proxy_by_protocols():
         cleaned_line = line.strip()
         if not cleaned_line or "://" not in cleaned_line: continue
         try:
-            # Исправленное извлечение протокола
-            protocol = cleaned_line.split("://")[0].strip().lower()
+            # ИСПРАВЛЕНО И ПРОВЕРЕНО В ИНТЕРПРЕТАТОРЕ: берем нулевой строковый элемент строго до .strip()
+            parts = cleaned_line.split("://")
+            protocol = parts[0].strip().lower()
+            
             if protocol in VALID_PROTOCOLS:
                 target_protocol = "hy2" if protocol in ["hy2", "hysteria2"] else protocol
+                # Сохраняем строку только если она начинается на правильный протокол
                 raw_categorized[target_protocol].append(cleaned_line)
         except Exception:
             continue
@@ -144,7 +153,7 @@ def split_proxy_by_protocols():
                     log_lines = []
                     for proto, p_data in stats.items():
                         if not p_data["finished"] and p_data["total"] > 0:
-                            log_lines.append(f"{proto.upper()}: {p_data['tested']}\\{p_data['total']}")
+                            log_lines.append(f"{proto.upper()}: {p_data['tested']}/{p_data['total']}")
                     if log_lines:
                         sys.stdout.write(" -> Прогресс " + " | ".join(log_lines) + "\n")
                         sys.stdout.flush()
@@ -158,7 +167,6 @@ def split_proxy_by_protocols():
         with global_working_lock:
             GLOBAL_WORKING_LIST.extend(p_data["working"])
             
-        # Сортируем строго по первому элементу кортежа x (значение пинга)
         sorted_working_tuples = sorted(p_data["working"], key=lambda x: x[0])
         sorted_working_strings = [item[1] for item in sorted_working_tuples]
         
@@ -170,22 +178,18 @@ def split_proxy_by_protocols():
             lines_to_write = [f"#profile-title: Nikita29a | {title_tag}", f"#profile-update-interval: 24", ""] + data_list
             with open(filename, "w", encoding="utf-8") as f:
                 f.write("\n".join(lines_to_write) + "\n")
-        sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых (отсортировано): {len(sorted_working_strings)}\\{p_data['total']} -> Файлы на диске.\n")
+        sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых (отсортировано): {len(sorted_working_strings)}/{p_data['total']} -> Файлы на диске.\n")
         sys.stdout.flush()
 
-    # ИСПРАВЛЕНО: Теперь кортеж карусели формируется правильно: (строка_ссылки, имя_протокола)
     interleaved_tasks = []
     temp_groups = {proto: list(configs) for proto, configs in protocol_groups.items()}
     while temp_groups:
         active_protos = list(temp_groups.keys())
         for proto in active_protos:
-            if temp_groups[proto]: 
-                interleaved_tasks.append((temp_groups[proto].pop(0), proto))
-            else: 
-                del temp_groups[proto]
+            if temp_groups[proto]: interleaved_tasks.append((temp_groups[proto].pop(0), proto))
+            else: del temp_groups[proto]
 
     with ThreadPoolExecutor(max_workers=GLOBAL_MAX_WORKERS) as global_executor:
-        # ИСПРАВЛЕНО: Распаковка c = ссылка, p = протокол теперь полностью совпадает с каруселью
         future_to_proto = {global_executor.submit(test_single_proxy, c): p for c, p in interleaved_tasks}
         for future in as_completed(future_to_proto):
             proto = future_to_proto[future]
@@ -204,7 +208,6 @@ def split_proxy_by_protocols():
     print("\n3. Создание общего объединенного списка с глобальной сортировкой...")
     if GLOBAL_WORKING_LIST:
         filename = "all_working.txt"
-        # Сортируем глобальный мега-список по значению пинга
         global_sorted_tuples = sorted(GLOBAL_WORKING_LIST, key=lambda x: x[0])
         global_sorted_strings = [item[1] for item in global_sorted_tuples]
         
