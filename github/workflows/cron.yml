@@ -1,0 +1,29 @@
+name: Daily Proxy Update
+
+on:
+  schedule:
+    # 5:00 утра по Москве — это 2:00 ночи по времени UTC (Greenwich)
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Позволяет запускать скрипт вручную кнопкой
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run script
+        run: python update_proxies.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add *.txt
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update proxies $(date +'%Y-%m-%d')" && git push)
