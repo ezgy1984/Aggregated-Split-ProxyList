@@ -1,9 +1,8 @@
 import urllib.request
 import collections
-import base64
 import os
 
-# ИСХОДНЫЙ URL ЗАМЕНЕН ПО ВАШЕМУ ЗАПРОСУ
+# ССЫЛКА ЗАКРЕПЛЕНА И НЕ БУДЕТ МЕНЯТЬСЯ
 URL = "https://github.com/nikita29a/FreeProxyList/raw/refs/heads/main/mirror/1.txt"
 
 # Белый список протоколов (Vmess намеренно исключен)
@@ -60,19 +59,16 @@ def split_proxy_by_protocols():
         
         if "://" in cleaned_line:
             try:
-                # ИСПРАВЛЕНО: берем [0] элемент из списка split, а затем переводим в .lower()
+                # Извлекаем протокол (все, что до ://) в нижнем регистре
                 protocol = cleaned_line.split("://")[0].lower()
                 
-                # Берем только протоколы из разрешенного списка
+                # Проверяем наличие в белом списке (Vmess автоматически отсекается)
                 if protocol in VALID_PROTOCOLS:
-                    # Кодируем каждую ССЫЛКУ в Base64 отдельно
-                    link_bytes = cleaned_line.encode('utf-8')
-                    encoded_link = base64.b64encode(link_bytes).decode('utf-8')
-                    categorized_proxies[protocol].append(encoded_link)
+                    categorized_proxies[protocol].append(cleaned_line)
             except Exception:
                 continue
 
-    print("\n2. Сохранение новых файлов в формате Codeberg/Hiddify:")
+    print("\n2. Сохранение новых файлов в открытом формате (как на Codeberg):")
     
     if not categorized_proxies:
         print(" -> Файлы не созданы: в скачанном тексте не обнаружено подходящих протоколов.")
@@ -82,7 +78,7 @@ def split_proxy_by_protocols():
         display_name = PROTOCOL_NAMES.get(protocol, protocol.upper())
         filename = f"{protocol}.txt"
         
-        # Спецификация формата Hiddify: открытые заголовки без лишних пробелов
+        # Спецификация формата Hiddify: открытые заголовки без лишних пробелов, ссылки текстом
         lines_to_write = [
             f"#profile-title: Nikita29a | {display_name}",
             f"#profile-update-interval: 24",
