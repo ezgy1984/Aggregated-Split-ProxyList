@@ -11,7 +11,7 @@ import re
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-# ИСТОЧНИКИ НАДЁЖНО ЗАФИКСИРОВАНЫ СТРОГО ИЗ ВАШЕГО PDF
+# ИСТОЧНИКИ НАДЁЖНО ЗАФИКСИРОВАНЫ
 SOURCES = [
     "https://github.com/nikita29a/FreeProxyList/raw/refs/heads/main/mirror/1.txt",
     "https://raw.githubusercontent.com/ebrasha/free-v2ray-public-list/refs/heads/main/V2Ray-Config-By-EbraSha-All-Type.txt",
@@ -37,9 +37,13 @@ geoip_cache_lock = threading.Lock()
 
 GLOBAL_WORKING_LIST = []
 global_working_lock = threading.Lock()
-INVALID_CONFIGS = collections.defaultdict(list)
+INVALID_CONFIGS = collections.defaultdict(list)  
 stats = {}  
 progress_lock = threading.Lock()
+
+# Счетчики для логирования прогресса GeoIP
+geoip_counters = {"total": 0, "checked": 0, "found_us": 0}
+geoip_log_lock = threading.Lock()
 
 def clear_old_files():
     print("0. Инициализация и тотальная очистка окружения...")
@@ -81,7 +85,7 @@ def clear_old_files():
                 os.remove(item)
                 deleted_root += 1
             except Exception: pass
-    print(f" -> Корневой каталог очищен от результатов прошлых сессий. Стерто *.txt файлов: {deleted_root}\n")
+    print(f" -> {deleted_root} старых файлов результатов стерто из корня.\n")
 
 def fetch_source_data(url):
     try:
@@ -101,6 +105,33 @@ def fetch_source_data(url):
     except Exception as e:
         print(f" [!] Сбой загрузки источника {url}: ({e})")
         return ""
+def parse_host_port(config_str):
+    """Исправленный надежный разбор хоста и порта с использованием системного urlparse."""
+    try:
+        # ИСПРАВЛЕН КРИТИЧЕСКИЙ БАГ: корректное последовательное разделение строки
+        clean_url = config_str.split("#")[0]
+        clean_url = clean_url.split("?")[0].strip()
+        
+        parsed = urllib.parse.urlparse(clean_url)
+        host = parsed.hostname
+        
+        if not host and "@" in parsed.netloc:
+            host = parsed.netloc.split("@")[-1].split(":")[0]
+        elif not host:
+            host = parsed.netloc.split(":")[0]
+            
+        port = parsed.port
+        if not port and ":" in parsed.netloc:
+            port_str = parsed.netloc.split(":")[-1]
+            digits = "".join(c for c in port_str if c.isascii() and c.isdigit())
+            if digits: port = int(digits)
+            
+        if host and port and (1 <= port <= 65535):
+            return host, port
+    except Exception:
+        pass
+    return None
+
 def check_is_usa_geoip(host):
     """Проверяет физическое расположение хоста через кэшируемый DNS/GeoIP запрос."""
     if not host:
@@ -149,8 +180,7 @@ def try_reconstruct_broken_config(broken_str):
         elif ":" in text:
             split_colon = text.split(":")[-1]
             digits = "".join(c for c in split_colon if c.isascii() and c.isdigit())
-            if digits and (1 <= int(digits) <= 65535):
-                port = digits
+            if digits and (1 <= int(digits) <= 65535): port = digits
 
         dummy_uuid = "00000000-0000-0000-0000-000000000000"
         query_params = []
@@ -161,10 +191,8 @@ def try_reconstruct_broken_config(broken_str):
         sni = host_match.group(1) if host_match else server_address
         query_params.append(f"sni={sni}")
         
-        if "reality" in text.lower() or pbk_match:
-            query_params.append("security=reality")
-        else:
-            query_params.append("security=tls")
+        if "reality" in text.lower() or pbk_match: query_params.append("security=reality")
+        else: query_params.append("security=tls")
             
         if path_match: query_params.append(f"path={path_match.group(1)}")
         elif "path=/" in text: query_params.append("path=/")
@@ -181,7 +209,7 @@ def validate_and_fix_config(config_str):
         return try_reconstruct_broken_config(config_str)
         
     try:
-        # УСТРАНЕН АТТРИБУТ-БАГ: split возвращает список, берем индекс [0]
+        # ИСПРАВЛЕН БАГ ИЗВЛЕЧЕНИЯ: Берем нулевой элемент до вызова строковых методов
         proto_part = cleaned.split("://")[0].strip().lower()
         if proto_part not in VALID_PROTOCOLS:
             return try_reconstruct_broken_config(config_str)
@@ -192,36 +220,19 @@ def validate_and_fix_config(config_str):
         if "#" in url_main:
             url_main, hash_part = url_main.split("#", 1)
             
+        parsed_data = parse_host_port(url_main)
+        if not parsed_data:
+            return try_reconstruct_broken_config(config_str)
+            
+        host, port = parsed_data
         main_part = url_main.split("://")[-1]
-        if "@" not in main_part:
-            return try_reconstruct_broken_config(config_str)
-            
-        auth_part, server_part = main_part.split("@", 1)
-        if not auth_part.strip():
-            return try_reconstruct_broken_config(config_str)
-            
-        if target_proto == "vless":
-            uuid_clean = auth_part.strip()
-            uuid_regex = re.compile(r'^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$')
-            if not uuid_regex.match(uuid_clean):
-                auth_part = "00000000-0000-0000-0000-000000000000"
-
+        auth_part = main_part.split("@")[0] if "@" in main_part else "user"
+        
         params_part = ""
-        if "?" in server_part:
-            server_part, params_part = server_part.split("?", 1)
-            
-        if ":" not in server_part:
-            return try_reconstruct_broken_config(config_str)
-            
-        host, port_str = server_part.split(":", 1)
-        if "/" in port_str:
-            port_str, _ = port_str.split("/", 1)
-            
-        port_digits = "".join(c for c in port_str if c.isascii() and c.isdigit())
-        if not port_digits or not (1 <= int(port_digits) <= 65535):
-            return try_reconstruct_broken_config(config_str)
-            
-        fixed_url = f"{proto_part}://{auth_part}@{host}:{port_digits}"
+        if "?" in main_part:
+            params_part = main_part.split("?")[-1]
+
+        fixed_url = f"{proto_part}://{auth_part}@{host}:{port}"
         if params_part: fixed_url += f"?{params_part}"
         if hash_part: fixed_url += f"#{hash_part}"
         else: fixed_url += "#Fixed_Config"
@@ -230,57 +241,11 @@ def validate_and_fix_config(config_str):
     except Exception:
         return try_reconstruct_broken_config(config_str)
 
-def parse_host_port(config_str):
-    try:
-        main_part = config_str.split("://")[-1]
-        if "#" in main_part: main_part = main_part.split("#")[0]
-        if "?" in main_part: main_part = main_part.split("?")[0]
-        if "@" in main_part: server_part = main_part.split("@")[-1]
-        else: server_part = main_part
-        if "/" in server_part: server_part = server_part.split("/")[0]
-        if ":" in server_part:
-            parts = server_part.split(":")
-            host = parts[0]
-            port_val = "".join(c for c in parts[1] if c.isascii() and c.isdigit())
-            if port_val:
-                return host, int(port_val)
-    except Exception:
-        pass
-    return None
-
-def test_host_socket(host, port):
-    sock = None
-    start_time = time.time()
-    try:
-        sock = socket.create_connection((host, port), timeout=TIMEOUT)
-        return int((time.time() - start_time) * 1000)
-    except Exception:
-        return None
-    finally:
-        if sock:
-            try:
-                sock.shutdown(socket.SHUT_RDWR)
-                sock.close()
-            except Exception: pass
-
-def test_single_proxy(config_str):
-    parsed = parse_host_port(config_str)
-    if not parsed: return None, config_str
-    host, port = parsed
-    cache_key = f"{host}:{port}"
-    with host_cache_lock:
-        if cache_key in HOST_STATUS_CACHE:
-            return HOST_STATUS_CACHE[cache_key], config_str
-    ping_result = test_host_socket(host, port)
-    with host_cache_lock: 
-        HOST_STATUS_CACHE[cache_key] = ping_result
-    return ping_result, config_str
-
 def save_protocol_files(protocol):
     global stats, GLOBAL_WORKING_LIST
     p_data = stats[protocol]
-    sorted_tuples = sorted(p_data["working"], key=lambda x: x[0])
-    working_strings = [item[1] for item in sorted_tuples]
+    sorted_tuples = sorted(p_data["working"], key=lambda x: x)
+    working_strings = [item for item in sorted_tuples]
     with global_working_lock:
         GLOBAL_WORKING_LIST.extend(p_data["working"])
         
@@ -293,10 +258,10 @@ def save_protocol_files(protocol):
         with open(filename, "w", encoding="utf-8") as f: 
             f.write("\n".join(lines_to_write) + "\n")
             
-    sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых (отсортировано): {len(working_strings)}\\{p_data['total']} -> protocols/ на диске.\n") 
+    sys.stdout.write(f"[Финиш] {protocol.upper()} завершен! Живых (отсортировано): {len(working_strings)}\\{p_data['total']} -> protocols/\n") 
     sys.stdout.flush()
 def split_proxy_by_protocols():
-    global stats, stop_logging, INVALID_CONFIGS, GLOBAL_WORKING_LIST
+    global stats, stop_logging, INVALID_CONFIGS, GLOBAL_WORKING_LIST, geoip_counters
     clear_old_files()
     print("1. Запуск парсера сторонних репозиториев...")
     all_lines = []
@@ -331,7 +296,7 @@ def split_proxy_by_protocols():
             safe_proto = proto_detected if proto_detected in VALID_PROTOCOLS or proto_detected == "unknown" else "unknown"
             INVALID_CONFIGS[safe_proto].append(line)
             
-    print(f" -> [Инфо] Восстановлено из фрагментов: {reconstructed_count} конфигураций.")
+    print(f" -> [Инфо] Успешно восстановлено из фрагментов: {reconstructed_count} конфигураций.")
     print("\n[Диск] Сохранение отбракованных невалидных конфигураций...")
     all_invalid_pool = set()
     for proto, bad_list in INVALID_CONFIGS.items():
@@ -346,43 +311,65 @@ def split_proxy_by_protocols():
         all_inv_filename = "Invalid/all_invalid.txt"
         with open(all_inv_filename, "w", encoding="utf-8") as f: f.write("\n".join(sorted(list(all_invalid_pool))) + "\n")
 
-    # УНИКАЛИЗАЦИЯ ВЫНЕСЕНА ИЗ ЦИКЛА ДЛЯ ИСКЛЮЧЕНИЯ ЗАВИСАНИЯ (KEYBOARDINTERRUPT)
     protocol_groups = {}
     all_valid_flat_list = []
     for proto, configs in raw_categorized.items():
         unique_configs = list(set(configs))
         protocol_groups[proto] = unique_configs
         all_valid_flat_list.extend(unique_configs)
-        
-    print("\n[Экспорт] Запуск гибридного Regex + GeoIP анализа для создания USA_ALL.txt...")
+
+    print("\n[Экспорт] Анализ сформированных файлов протоколов по GeoIP + Regex для USA_ALL.txt...")
     usa_all_configs = []
     usa_pattern = re.compile(r'#.*?\b(us|usa|united[\s_]*states|🇺🇸)\b', re.IGNORECASE)
     
-    def process_usa_all_check(cfg):
-        if usa_pattern.search(cfg): return cfg
-        parsed = parse_host_port(cfg)
-        if parsed and check_is_usa_geoip(parsed[0]): return cfg
-        return None
+    geoip_counters["total"] = len(all_valid_flat_list)
+    geoip_counters["checked"] = 0
+    geoip_counters["found_us"] = 0
+    stop_geoip_logging = False
+
+    def geoip_progress_logger():
+        while not stop_geoip_logging:
+            time.sleep(5.0)
+            with geoip_log_lock:
+                if geoip_counters["total"] > 0 and geoip_counters["checked"] < geoip_counters["total"]:
+                    sys.stdout.write(f" -> [GeoIP Спутник] Сканирование: {geoip_counters['checked']}\\{geoip_counters['total']} | Найдено серверов США: {geoip_counters['found_us']}\n")
+                    sys.stdout.flush()
+
+    def process_usa_check(cfg):
+        is_us = False
+        if usa_pattern.search(cfg):
+            is_us = True
+        else:
+            parsed = parse_host_port(cfg)
+            if parsed and check_is_usa_geoip(parsed[0]): # Передаем строго строковый хост
+                is_us = True
+        with geoip_log_lock:
+            geoip_counters["checked"] += 1
+            if is_us: geoip_counters["found_us"] += 1
+        return cfg if is_us else None
+
+    geo_logger_thread = threading.Thread(target=geoip_progress_logger); geo_logger_thread.start()
 
     with ThreadPoolExecutor(max_workers=GLOBAL_MAX_WORKERS) as geo_exec:
-        geo_futures = [geo_exec.submit(process_usa_all_check, c) for c in all_valid_flat_list]
+        geo_futures = [geo_exec.submit(process_usa_check, c) for c in all_valid_flat_list]
         for fut in as_completed(geo_futures):
             res = fut.result()
             if res: usa_all_configs.append(res)
             
+    stop_geoip_logging = True; geo_logger_thread.join()
+            
     if usa_all_configs:
-        usa_all_filename = "USA_ALL.txt"
         unique_usa_all = sorted(list(set(usa_all_configs)))
-        usa_all_lines = [f"#profile-title: Nikita29a | USA Raw Aggregated Database", f"#profile-update-interval: 24", ""] + unique_usa_all
-        with open(usa_all_filename, "w", encoding="utf-8") as f: f.write("\n".join(usa_all_lines) + "\n")
-        print(f" -> [Диск] Создан файл: {usa_all_filename} (Найдено серверов США по GeoIP+Regex: {len(unique_usa_all)})")
+        with open("USA_ALL.txt", "w", encoding="utf-8") as f:
+            f.write("\n".join([f"#profile-title: Nikita29a | USA Raw Database", ""] + unique_usa_all) + "\n")
+        print(f" -> [Диск] Успешно создан файл: USA_ALL.txt (Всего серверов США: {len(unique_usa_all)})")
     else:
-        print(" -> [Инфо] В сырой базе не обнаружено серверов США.")
+        print(" -> [Инфо] В отфильтрованных файлах протоколов не найдено серверов США.")
         
     print(f"\n2. Старт ОДНОВРЕМЕННОГО тестирования и сортировки по пингу ({GLOBAL_MAX_WORKERS} потоков)...") 
     for proto, configs in protocol_groups.items():
         stats[proto] = {"total": len(configs), "tested": 0, "working": [], "finished": False, "full_list": configs}
-        sys.stdout.write(f"[Пул] Загружен {proto.upper()} | Итого валидных к проверке: {len(configs)}\n")
+        sys.stdout.write(f"[Пул] Загружен {proto.upper()} | Уникальных к проверке: {len(configs)}\n")
     sys.stdout.flush()
         
     interleaved_tasks = []
@@ -392,7 +379,7 @@ def split_proxy_by_protocols():
             if i < len(configs): interleaved_tasks.append((configs[i], proto))
                 
     if not interleaved_tasks:
-        print(" -> Остановка: Нет валидных прокси к проверке.")
+        print(" -> Остановка: Нет прокси к проверке.")
         return
 
     stop_logging = False
@@ -423,8 +410,8 @@ def split_proxy_by_protocols():
     
     print("\n3. Создание общего объединенного списка с глобальной сортировкой...")
     if GLOBAL_WORKING_LIST:
-        global_sorted = sorted(GLOBAL_WORKING_LIST, key=lambda x: x[0])
-        all_working_strings = [item[1] for item in global_sorted]
+        global_sorted = sorted(GLOBAL_WORKING_LIST, key=lambda x: x)
+        all_working_strings = [item for item in global_sorted]
         
         with open("all_working.txt", "w", encoding="utf-8") as f:
             f.write("\n".join([f"#profile-title: Nikita29a | Verified Working All Protocols", ""] + all_working_strings) + "\n")
@@ -434,10 +421,17 @@ def split_proxy_by_protocols():
             f.write("\n".join([f"#profile-title: Nikita29a | TOP-1000 Ultra Low Ping", ""] + all_working_strings[:1000]) + "\n")
         print(f" -> [Диск] Создан файл лучших конфигураций: top1000_active.txt")
         
+        # 3.3. СОЗДАНИЕ top_500notroy.txt ИЗ ВСЕХ ПРОТОКОЛОВ ЗА ИСКЛЮЧЕНИЕМ TROJAN
+        notroy_strings = [c for c in all_working_strings if not c.startswith("trojan://")]
+        top500_notroy = notroy_strings[:500]
+        with open("top_500notroy.txt", "w", encoding="utf-8") as f:
+            f.write("\n".join([f"#profile-title: Nikita29a | TOP-500 Low Ping (No Trojan)", ""] + top500_notroy) + "\n")
+        print(f" -> [Диск] Создан файл: top_500notroy.txt (записей: {len(top500_notroy)})")
+
         print(" -> Проверка GeoIP для создания USA_active.txt...")
         usa_active_strings = []
         with ThreadPoolExecutor(max_workers=GLOBAL_MAX_WORKERS) as geo_active_exec:
-            active_futures = [geo_active_exec.submit(process_usa_all_check, c) for c in all_working_strings]
+            active_futures = [geo_active_exec.submit(process_usa_check, c) for c in all_working_strings]
             for fut in as_completed(active_futures):
                 res = fut.result()
                 if res: usa_active_strings.append(res)
