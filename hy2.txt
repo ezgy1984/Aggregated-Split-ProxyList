@@ -310,8 +310,6 @@ hy2://3437f34e-1b77-11eb-8684-f23c913c8d2b@112.120.221.250:443?insecure=1&sni=f3
 hy2://3437f34e-1b77-11eb-8684-f23c913c8d2b@172.236.139.236:443?insecure=1&sni=44093a09-tmeqo0-unh4sc-xm0q.sg7.hyhuawei.com
 hy2://3437f34e-1b77-11eb-8684-f23c913c8d2b@203.198.86.98:443?insecure=1&sni=4b3d60a2-tmeqo0-unh4sc-xm0q.nw4.hyhuawei.com
 hy2://3437f34e-1b77-11eb-8684-f23c913c8d2b@64.32.13.203:443
-hy2://34ec1f39-3e1c-4b03-a65a-87a98b097bf3@153.56.210.134:53718
-hy2://34ec1f39-3e1c-4b03-a65a-87a98b097bf3@153.56.210.134:53718?insecure=1&sni=www.bing.com&obfs=salamander&obfs-password=2751fccc-d797-47cc-895d-70c9629cc8fe
 hy2://35415e5e-3666-4454-8c45-903af0fcddf4@85.120.228.208:47257?sni=www.bing.com&insecure=1
 hy2://364e8db7a2d57e32@167.253.152.235:46600?insecure=1&sni=www.bing.com
 hy2://367e233c-2f54-11ee-9ae1-f23c9164ca5d@112.120.221.250:443?insecure=1&sni=39c981a4-tmm5c0-u093mf-1mina.hk3.hyhuawei.com
@@ -666,8 +664,6 @@ hy2://81d8ec6d-3447-47f6-88df-631718401f31@45.144.174.12:11111/?insecure=1&sni=g
 hy2://81d8ec6d-3447-47f6-88df-631718401f31@45.144.174.160:11111/?insecure=1&sni=gateway.icloud.com
 hy2://81ea378b37931b23@77.221.158.52:7373?obfs=salamander&obfs-password=7d9dff369a11f6e0&insecure=1&sni=www.google.com
 hy2://81ea378b37931b23@[2a12:5940:72da::2]:7373?obfs=salamander&obfs-password=7d9dff369a11f6e0&insecure=1&sni=vkvd127.mycdn.me
-hy2://8294f130408299df8cab08c80bf6f819@24.233.8.109:443
-hy2://8294f130408299df8cab08c80bf6f819@24.233.8.109:443?sni=www.bing.com&insecure=1&obfs=salamander&obfs-password=c8827ab99e316c5bd414e21afa915ddf
 hy2://837e9ea2-cf0b-46a1-93a8-7e25c3a4066c@193.222.99.51:443?sni=argg1.auragg.org&insecure=0&allowInsecure=0
 hy2://83d4edf5-8612-4b0f-8a82-33a211b3b179@46.29.161.224:1200?obfs=salamander&obfs-password=NDhhNmY5YTY0MGYzOTgxYQ==&insecure=1
 hy2://8418fb71-419d-4fc3-8b29-d7fee8de76c7@104.168.34.109:49999-65000&insecure=1&sni=www.bing.com
@@ -1263,8 +1259,6 @@ hy2://a7c5d30b-ce9b-4e34-b5cb-66f8308790ef@217.142.185.179:2009
 hy2://a7c5d30b-ce9b-4e34-b5cb-66f8308790ef@217.142.185.179:2015?insecure=1&sni=id-house.9999231.xyz&obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA==
 hy2://a7c5d30b-ce9b-4e34-b5cb-66f8308790ef@54.199.199.119:2019
 hy2://a7c5d30b-ce9b-4e34-b5cb-66f8308790ef@54.65.184.105:2039?insecure=1&sni=ro-wy.9999231.xyz&obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA==
-hy2://a81a7b45-dd70-42ef-822f-ef467f944382@153.56.210.134:38045
-hy2://a81a7b45-dd70-42ef-822f-ef467f944382@153.56.210.134:38045?insecure=1&sni=www.bing.com&obfs=salamander&obfs-password=642516f2-f9bd-41ce-9904-dee699c39cf9
 hy2://a914681a-8dda-4c98-8468-c313f5539b14@213.35.99.16:2056?insecure=1&sni=sg3.eyucdn.xyz
 hy2://aVJxAd6WSF@77.90.135.64:20388
 hy2://aVJxAd6WSF@77.90.135.64:20388?obfs=salamander&obfs-password=bluecrystal3&insecure=1
@@ -1464,8 +1458,6 @@ hy2://c72ee44c@[2001:41d0:a:2a7a:a:b:df4e:2408]:35051?insecure=1&sni=2001:41d0:a
 hy2://c7f34b2d-85c6-49a4-ab33-5b53bea859a4@91.132.146.90:37015?insecure=1&sni=xg.foldjc.top
 hy2://c8865525-d888-4318-aa77-44ca4c95e88b@194.87.68.196:13167?obfs=salamander&obfs-password=MzliZDM5MDFhYmFlNTAyMA==&insecure=1
 hy2://c8a6d478-b169-4f00-880a-0c6b38f0ee61@87.229.95.140:443?obfs=salamander&obfs-password=i5mjtZaeVza5scg3&sni=55127e420fe3nl1.587458.xyz
-hy2://c8ed6cd1-6566-4f7a-819e-1c55b2b360c9@153.56.210.134:34121
-hy2://c8ed6cd1-6566-4f7a-819e-1c55b2b360c9@153.56.210.134:34121?insecure=1&sni=www.bing.com&obfs=salamander&obfs-password=9a33460c-b037-47aa-a606-d04211f4e0ec
 hy2://c9819e7a-3be8-4700-9523-8f55943b2f06@47.243.88.31:6231?obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA==&insecure=1
 hy2://c9819e7a-3be8-4700-9523-8f55943b2f06@47.74.42.113:6588?obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA==&insecure=1
 hy2://c9819e7a-3be8-4700-9523-8f55943b2f06@47.89.248.125:5113?obfs=salamander&obfs-password=ZDQxZDhjZDk4ZjAwYjIwNA==
@@ -1776,13 +1768,11 @@ hy2://fd81b7c3-8027-423b-b361-2de87ebd0f44@103.27.61.248:52013?sni=files.xjqxz.t
 hy2://fd81b7c3-8027-423b-b361-2de87ebd0f44@103.69.188.192:52013?sni=files.xjqxz.top&insecure=1
 hy2://fd81b7c3-8027-423b-b361-2de87ebd0f44@103.77.215.181:52013?sni=files.xjqxz.top&insecure=1
 hy2://fe475179-d8a8-420d-a4ac-3e415ed8dc72@144.225.187.153:11683
-hy2://fe552e75-4ffd-4e1a-984c-44e71c746c15@156.229.160.253:55000?insecure=1&sni=www.bing.com
 hy2://fe59e701-f477-4181-a137-26e8ea8efb52@52.194.222.136:14443
 hy2://fe59e701-f477-4181-a137-26e8ea8efb52@54.178.169.107:14443
 hy2://fe9b17e8-41e1-4d1b-b588-93a23665724f@37.114.49.38:2056?allowInsecure=1
 hy2://fe9b17e8-41e1-4d1b-b588-93a23665724f@5.39.254.225:2056?headertype=none&encryption=none&sni=ld1.mangshe.xyz&allowInsecure=1
 hy2://fe9b17e8-41e1-4d1b-b588-93a23665724f@84.200.33.151:2056?allowInsecure=1&sni=nlb1.mangshe.xyz
-hy2://ff0343ad-1c9f-4986-8c62-c01935b508ca@153.56.210.134:57251
 hy2://ffed9ff9-ec0f-4c97-854b-369e2931a777@176.32.35.194:28993?obfs=salamander&obfs-password=MGJiYThkMjgwNDE1Y2FkMg==&insecure=1
 hy2://ffed9ff9-ec0f-4c97-854b-369e2931a777@192.124.176.87:9781?obfs=salamander&obfs-password=ZTg1ZWVjNjAxZmRlNGI5MA==&insecure=1
 hy2://fmaznn1lrzys7ddy@65.109.18.120:52076
