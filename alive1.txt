@@ -40,7 +40,6 @@ vless://454431fc-71e2-42b1-b375-5b55dd06666a@185.213.20.133:443?encryption=none&
 vless://454431fc-71e2-42b1-b375-5b55dd06666a@78.153.155.149:443?encryption=none&fp=firefox&pbk=aUdvs6o4PHN6jmdkIKBA2rHsN_7l8W2SaDfNgzn-BwU&security=reality&sni=example.org&type=tcp
 vless://6e59d5c5-7aa3-4c36-a4c4-e3b899525ed2@139.162.27.96:2096?fp=chrome&host=free-server.techsonic.dev&path=/free-server.techsonic.dev&security=tls&sni=free-server.techsonic.dev&type=ws
 vless://454431fc-71e2-42b1-b375-5b55dd06666a@103.106.229.236:443?encryption=none&security=reality&sni=sg.monkora.org&fp=firefox&pbk=aUdvs6o4PHN6jmdkIKBA2rHsN_7l8W2SaDfNgzn-BwU&type=tcp&headerType=none
-vless://199.68.198.13:443?encryption=none&fp=firefox&pbk=aUdvs6o4PHN6jmdkIKBA2rHsN_7l8W2SaDfNgzn-BwU&security=reality&sni=example.org&type=tcp
 vless://3cd1770d-f285-4cf4-8979-e9dd8f4be36a@23.134.76.212:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=us.dark-bit.cc&fp=chrome&pbk=cYmfBXsDs1sqQ2ZBW3xsFroB7JHV_ufFT5m7ab7STnU&sid=9ab513f082d4c6e1&spx=/&type=tcp
 vless://87fd990d-ca93-440a-bbd4-e8281c4a0910@91.108.249.201:705?encryption=none&type=grpc&security=reality&sni=www.kayak.com&pbk=nn7zao7trQrkZv5IjiOPmeWPe-Qtj3tFi14Eon9RHC4&fp=edge&spx=/
 vless://e19f406e-0f0f-4abd-9861-a3d2d213b650@172.67.223.131:80?type=xhttp&host=fl.subnimnet2.ir&path=/ws
