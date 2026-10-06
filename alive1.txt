@@ -469,3 +469,6 @@ vless://a2bbb4ba-6d21-4ae0-9682-dacfbea98ae9@217.19.122.214:8448?security=realit
 vless://c4edb87e-8544-4fa4-bd1c-b0cda9a34b46@172.67.217.240:443?host=a.cwvps.eu.org&path=/ws&security=tls&sni=a.cwvps.eu.org&type=ws
 vless://c4edb87e-8544-4fa4-bd1c-b0cda9a34b46@172.67.217.240:443?fp=random&host=a.cwvps.eu.org&path=/ws&security=tls&sni=a.cwvps.eu.org&type=ws
 trojan://s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z@77.74.123.108:4443?sni=grape-test-italy.dynuddns.net&type=tcp
+vless://4d852af3-a121-41aa-9aed-4ca40a6f7b4d@193.233.232.96:443?flow=xtls-rprx-vision&fp=randomized&pbk=uC4W93YTVI5kbpN5ih2WZfQjikpNBn61-AhljO8ExFg&security=reality&sid=fa764ccf&sni=addons.mozilla.org&type=tcp
+vless://0243cef3-6acd-4cfe-8134-73c10375e61b@2.27.61.143:443/?type=tcp&encryption=none&flow=xtls-rprx-vision&sni=qwe111.moneyvpn.org&security=reality&pbk=J9yuGstyASp2Y4uKucVAp5lfS6IWwXgcZu45iMHcnjM&sid=8622922189abcdef
+
