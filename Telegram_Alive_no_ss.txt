@@ -1285,7 +1285,6 @@ vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@172.64.150.28:2082?fp=chrome&host=h
 vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@188.114.97.6:8080?security=none&type=ws&path=/sg-melbi&host=hhlfy.twiladaphne.ndjp.net&packetEncoding=xudp
 vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@172.64.150.28:2082?host=hhlfy.twiladaphne.ndjp.net&path=/fpfp=chrome&security=none&sni=hhlfy.twiladaphne.ndjp.net&type=ws
 vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@104.21.70.21:8080?host=hhlfy.twiladaphne.ndjp.net&path=/&security=none&sni=hhlfy.twiladaphne.ndjp.net&type=ws
-vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@104.21.70.21:8080?host=hhlfy.twiladaphne.ndjp.net&path=?ed&security=none&type=ws
 vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@188.114.97.6:8080?host=hhlfy.twiladaphne.ndjp.net&path=/fp=random&security=none&type=ws
 vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@188.114.97.6:8080?host=hhlfy.twiladaphne.ndjp.net&path=/fp=chrome&security=none&type=ws
 vless://e5cc16a6-ea42-46b2-82ae-ad2157e1641b@104.21.70.21:8080?host=hhlfy.twiladaphne.ndjp.net&path=/fp=random&security=none&type=ws
@@ -1513,7 +1512,6 @@ vless://47fcef29-ab4e-4aa6-932b-d95a18f28a4e@108.162.198.178:2095?host=8nj2r.2k8
 vless://47f79fc1-0646-40e8-8a58-73e85d183d5a@144.31.27.215:43000?flow=xtls-rprx-vision&fp=edge&pbk=dxCQnOekn14riFxt3vdwDNydvW47FsmwFG6BJ2mUgEg&security=reality&sid=568d87a47271344e&type=tcp
 vless://47f79fc1-0646-40e8-8a58-73e85d183d5a@64.188.126.56:43000?flow=xtls-rprx-vision&fp=safari&pbk=jjbMUO41S9JE7ou_zbbDStzSYLzJVN_0O-j0f6b380E&security=reality&sid=bf4e20af99d3042d&sni=64.188.126.56&type=tcp
 vless://47fcef29-ab4e-4aa6-932b-d95a18f28a4e@172.64.53.55:8080?fp=chrome&host=8nj2r.2k8t.f88.hh.vavava.kdns.fr&path=/?ed=2560security=tls&security=none&sni=8nj2r.2k8t.f88.hh.vavava.kdns.fr&type=ws
-vless://47fcef29-ab4e-4aa6-932b-d95a18f28a4e@172.64.158.146:8880?host=8nj2r.2k8t.f88.hh.vavava.kdns.fr&path=/?ed&security=none&sni=8nj2r.2k8t.f88.hh.vavava.kdns.fr&type=ws
 vless://47fcef29-ab4e-4aa6-932b-d95a18f28a4e@172.64.42.85:2086?host=8nj2r.2k8t.f88.hh.vavava.kdns.fr&path=/+&security=none&type=ws
 vless://47fcef29-ab4e-4aa6-932b-d95a18f28a4e@172.64.154.8:2052?host=8nj2r.2k8t.f88.hh.vavava.kdns.fr&path=/+&security=none&type=ws
 vless://489f1717-d3c7-4940-ad68-bdbdbab857f4@103.7.137.51:443?fp=firefox&host=x.m-90.xyz&path=t.me/TEAMNETGRATISCOL&security=tls&sni=x.m-90.xyz&type=ws
