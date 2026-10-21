@@ -74,7 +74,6 @@ trojan://Telegram_healer_config@104.17.147.22:443?sni=z6y-dAoX0hyhDtDY.R720kpbyX
 trojan://Telegram_healer_config@104.21.12.93:443?security=tls&sni=uH-E03OjZGQ4EV7yy7b.6V46fk4wd2Y8l5p2XTD.WORkErS.Dev&alpn=http/1.1&type=ws&path=/tr/iXLpDGAew6fKEQeQY84txlnklnRciaQ&ed=2560
 trojan://Telegram_healer_config@104.21.16.123:443?path=/tr/qL8YIeH28wNcXfNTPgLCwOhNFEr&security=tls&alpn=http/1.1&fp=chrome&type=ws&sni=7X7o3VTq5z6ymu3Hv1fH-Op9BlT.hYa6LOSM6lZNOXHm6w3MK.woRKErS.DeV&ed=2560
 trojan://Telegram_healer_config@104.21.16.123:443?sni=7x7o3vtq5z6ymu3hv1fh-op9blt.hya6losm6lznoxhm6w3mk.workers.dev&type=ws&path=/tr/qL8YIeH28wNcXfNTPgLCwOhNFEr&alpn=http/1.1&fp=chrome&ed=2560
-trojan://Telegram_healer_config@104.21.17.125:443?path=/tr/MBHDTiG2ZHfgBBj9iEpRFkse0tafJ&security=tls&alpn=http/1.1&host=&fp=chrome&type=ws&sni=30F67SBQ8jJWMT7gytfc14.0m68-qZ3hqYFNlaR6n3Iq.WorKerS.Dev&ed=2560
 trojan://Telegram_healer_config@104.21.17.125:443?path=/tr/MBHDTiG2ZHfgBBj9iEpRFkse0tafJ&security=tls&alpn=http/1.1&fp=chrome&type=ws&sni=30F67SBQ8jJWMT7gytfc14.0m68-qZ3hqYFNlaR6n3Iq.WorKerS.Dev&ed=2560
 trojan://Telegram_healer_config@104.21.17.125:443?sni=30f67sBQ8jJwMt7GYtfc14.0M68-Qz3hqYfnLAR6n3Iq.wORkErs.dEv&type=ws&path=/tr/hYgAqUlh5GyczDyXP?ed&alpn=http/1.1&fp=chrome
 trojan://Telegram_healer_config@104.21.4.124:443?path=/tr/W3Ei3SdcW9sRVMLIbEd8sB1lm&security=tls&alpn=http/1.1&fp=chrome&type=ws&sni=vRE6r9qrbQi0T25tg.SRtB0M3HDbWr2cjZ8fJuR.WoRKerS.DEv&ed=2560
@@ -372,8 +371,7 @@ trojan://oiiaB38ywjEHCWRs_O_a_1113_Il_KeyyyHop_Bes1@109.206.241.10:449?type=tcp
 trojan://p5jTPcffLgi4gaNOJd2KUTb9YEPBBD5B@154.90.62.70:56127?type=tcp
 trojan://pjg&JybcgFsca,+gQMa@104.17.147.22:443?ed=2560&path=/tr/4jPX74py1Uh20tnk6uozVTHIZXVMMP&security=tls&alpn=http/1.1&fp=chrome&type=ws&sni=022XW1DMCzG0c6165Pcla6.toMBoRn69.woRKeRs.DEV
 trojan://pjg&JybcgFsca,+gQMa@104.21.84.62:443?security=tls&sni=022xW1dMCzG0c6165PCla6.TOMBorn69.woRKERS.dev&type=ws&path=/tr/9Krhh8DnN4WBkbQFAyN09f7V7ivKQ&fp=chrome&alpn=http/1.1&ed=2560
-trojan://pjg&JybcgFsca,+gQMa@172.67.187.167:443?path=/tr/9Krhh8DnN4WBkbQFAyN09f7V7ivKQ&security=tls&alpn=http/1.1&host=&fp=chrome&type=ws&sni=022xW1dMCzG0c6165PCla6.TOMBorn69.woRKERS.dev&ed=2560
-trojan://pjg&JybcgFsca,+gQMa@172.67.187.167:443?security=tls&sni=022xW1dMCzG0c6165PCla6.TOMBorn69.woRKERS.dev&type=ws&path=/tr/9Krhh8DnN4WBkbQFAyN09f7V7ivKQ&fp=chrome&alpn=http/1.1&ed=2560
+trojan://pjg&JybcgFsca,+gQMa@172.67.187.167:443?path=/tr/9Krhh8DnN4WBkbQFAyN09f7V7ivKQ&security=tls&alpn=http/1.1&fp=chrome&type=ws&sni=022xW1dMCzG0c6165PCla6.TOMBorn69.woRKERS.dev&ed=2560
 trojan://r137979f@104.19.63.25:443?security=tls&sni=sheleqaz.emotionreza.workers.dev&fp=chrome&type=ws&ed=2560
 trojan://s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z@77.74.123.106:4443?type=tcp
 trojan://s0_sdK93x9wer_D02Lz9cvK3_Sa014Oakl_C2z@77.74.123.106:4443?fp=firefox&security=tls&sni=grape-test-italy.dynuddns.net&type=tcp
@@ -5211,14 +5209,14 @@ vless://fee1da7e-a258-4456-8e5e-8ecf6518ed12@188.114.97.6:8080?packet-encoding=x
 vless://ff07a00f-0592-41dc-b0e1-b41b4732aad0@66.33.22.234:44242?host=mainline.proxy.rlwy.net&security=none&type=ws
 vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?path=/api/connect&security=tls&sni=wstg.datasynctrue.online&type=ws
 vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?security=tls&fp=chrome&type=ws&path=%2Fapi%2Fconnect&host=wstg.datasynctrue.online
-vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?fp=edge&path=/api/connect&pbk=LEUuplvXcqqtM3Ni76v7_rTQzzmZWVk3hF0SjdPAKz8&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
-vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?fp=qq&path=/api/connect&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
-vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?fp=qq&path=/api/connect&pbk=LEUuplvXcqqtM3Ni76v7_rTQzzmZWVk3hF0SjdPAKz8&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&type=ws
+vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?fp=chrome&path=/api/connect&pbk=LEUuplvXcqqtM3Ni76v7_rTQzzmZWVk3hF0SjdPAKz8&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
+vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?fp=chrome&path=/api/connect&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
+vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?fp=chrome&path=/api/connect&pbk=LEUuplvXcqqtM3Ni76v7_rTQzzmZWVk3hF0SjdPAKz8&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&type=ws
 vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@188.225.33.141:443?fp=qq&path=/api/connect&security=tls&sni=wstg.datasynctrue.online&type=ws
-vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@200.165.231.209:443?fp=qq&path=/api/connect&pbk=LEUuplvXcqqtM3Ni76v7_rTQzzmZWVk3hF0SjdPAKz8&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
+vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@200.165.231.209:443?fp=chrome&path=/api/connect&pbk=LEUuplvXcqqtM3Ni76v7_rTQzzmZWVk3hF0SjdPAKz8&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
 vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@200.165.231.209:443?fp=random&path=/api/connect&security=tls&sni=wstg.datasynctrue.online&type=ws
 vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@91.210.169.181:443?fp=chrome&host=wstg.datasynctrue.online&path=/api/connect&security=tls&type=ws
-vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@91.210.169.181:443?fp=qq&path=/api/connect&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
+vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@91.210.169.181:443?fp=chrome&path=/api/connect&security=tls&sid=dd3b257eabe14d18&sni=wstg.datasynctrue.online&spx=/&type=ws
 vless://ff0b6ba8-bed0-4c4d-bbc9-23af47582615@91.210.169.181:443?fp=random&path=/api/connect&security=tls&sni=wstg.datasynctrue.online&type=ws
 vless://ff642d7a-9a24-4078-a031-f8c656f4554e@5.223.41.179:80?fp=chrome&security=none&type=ws
 vless://ffa431ab-a59b-4092-a418-905fcb1e4d5f@172.67.173.89:443?alpn=http/1.1&fp=chrome&path=/vl/rYScQPG1EEjxXdswdMEU2b3rM4?ed=2560+&security=tls&sni=s0p42f8wwpdde5tf7m4l6l.ab1x-sn9o4y3n7ondkrd.workers.dev&type=ws
