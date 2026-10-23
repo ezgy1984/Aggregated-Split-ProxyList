@@ -467,8 +467,7 @@ vless://08203b91-9e5e-4072-adea-ee2b8afc0498@189.74.106.84:443?security=reality&
 vless://0836463b-214f-4af6-aa85-85a56a62388e@104.17.147.22:443?fp=chrome&path=/8eaZJhRwB5zzDy81&security=tls&sni=d2127a49-flat-wood-c4b5.milia-akbarpoor.workers.dev&type=ws
 vless://0836463b-214f-4af6-aa85-85a56a62388e@104.17.147.22:443?security=tls&fp=chrome&packet-encoding=xudp&sni=d2127A49-flAT-wooD-C4B5.mILia-AkbARpOor.WorkERs.dEV&type=ws&path=/8eaZJhRwB5zzDy81
 vless://0836463b-214f-4af6-aa85-85a56a62388e@104.21.32.1:443?security=tls&sni=d2127a49-flat-wood-c4b5.milia-akbarpoor.workers.dev&fp=randomized&type=ws&path=/kdbyvl5fp0ydted8&ed=2560
-vless://0836463b-214f-4af6-aa85-85a56a62388e@104.21.32.1:443?type=ws&security=tls&sni=d2127a49-flat-wood-c4b5.milia-akbarpoor.workers.dev&fp=chrome&path=/kdbyvl5fp0ydted8?ed=2560تعداد
-vless://0836463b-214f-4af6-aa85-85a56a62388e@104.21.32.1:443?fp=chrome&path=/kdbyvl5fp0ydted8?ed=2560تعداد+&security=tls&sni=d2127a49-flat-wood-c4b5.milia-akbarpoor.workers.dev&type=ws
+vless://0836463b-214f-4af6-aa85-85a56a62388e@104.21.32.1:443?type=ws&security=tls&sni=d2127a49-flat-wood-c4b5.milia-akbarpoor.workers.dev&fp=chrome&path=/kdbyvl5fp0ydted8&ed=2560
 vless://0836463b-214f-4af6-aa85-85a56a62388e@104.21.96.1:443?type=ws&path=/Pl67KhTLWmJqQ2lY&security=tls&sni=D2127A49-Flat-WOoD-c4b5.Milia-AKbaRpOor.workers.Dev&ed=2560
 vless://0836463b-214f-4af6-aa85-85a56a62388e@104.21.96.1:443?fp=chrome&path=/?TELEGRAM&security=tls&sni=d2127a49-flat-wood-c4b5.milia-akbarpoor.workers.dev&type=ws
 vless://0836463b-214f-4af6-aa85-85a56a62388e@104.21.96.1:443?fp=chrome&path=/Pl67KhTLWmJqQ2lY&security=tls&sni=d2127a49-flat-wood-c4b5.milia-akbarpoor.workers.dev&type=ws
