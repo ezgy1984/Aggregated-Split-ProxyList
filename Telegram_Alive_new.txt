@@ -134,7 +134,7 @@ vless://1896c6c9-a941-4688-a865-29027bf7f8e6@193.124.17.190:443?security=reality
 vless://18a1e914-dc23-4bc7-b0a7-5fd0fb565cc6@81.90.20.175:2053?fp=firefox&path=/api/v1/video/chunk&pbk=QLu2h7-oywCUDhQf6rN5W1WUoNxnDggwt51LkxJyGW4&security=reality&sid=966eadda72000d7c&sni=g4kci7n1loq2qgsa.client.lightningcdn.cc&type=xhttp
 vless://18a1e914-dc23-4bc7-b0a7-5fd0fb565cc6@81.90.20.175:2053?type=xhttp&security=reality&fp=chrome&sni=g4kci7n1loq2qgsa.client.lightningcdn.cc&pbk=QLu2h7-oywCUDhQf6rN5W1WUoNxnDggwt51LkxJyGW4&sid=966eadda72000d7c&path=/api/v1/video/chunk&mode=auto
 vless://19d5a678-8396-4e3b-93da-ece618d0e83a@61.230.160.34:24215?fp=chrome&pbk=mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE&security=reality&sni=addons.mozilla.org&type=tcp
-vless://19d5a678-8396-4e3b-93da-ece618d0e83a@61.230.160.34:24215?type=tcp&sni=addons.mozilla.org&fp=chrome&security=reality&pbk=mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE&sid=&allowInsecure=1
+vless://19d5a678-8396-4e3b-93da-ece618d0e83a@61.230.160.34:24215?type=tcp&sni=addons.mozilla.org&fp=chrome&security=reality&pbk=mdWKUPMVTtTbDqK10BPb89OcqBC2-Lx-4NOYtqc1GWE&allowInsecure=1
 vless://1a5e7720-abf3-4b9b-bc9b-9a900a04b434@94.156.79.93:443?security=reality&pbk=_0fpFqEEuCso3B8K7AAcMjctwG_xfCxO2PdKzGd_-hg&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=www.microsoft.com&sid=f129dcdbf64f
 vless://1a5e7720-abf3-4b9b-bc9b-9a900a04b434@94.156.79.93:443?security=reality&type=tcp&packetEncoding=xudp&sni=www.microsoft.com&fp=firefox&flow=xtls-rprx-vision&sid=f129dcdbf64f&pbk=_0fpFqEEuCso3B8K7AAcMjctwG_xfCxO2PdKzGd_-hg
 vless://1a8ecc41-6e62-431b-8eca-87c2fa4dc286@194.77.220.54:2052?type=tcp
@@ -828,7 +828,6 @@ vless://7b188eea-b08f-42c2-bac7-d3b0e74218b8@147.182.212.232:56565?alpn=http/1.1
 vless://7b188eea-b08f-42c2-bac7-d3b0e74218b8@147.182.212.232:56565?flow=xtls-rprx-vision&fp=firefox&pbk=Td03Ae-cuYLq4xg7MSps58c_yRUcbbwtZLXm0ywabjY&security=reality&sni=www.paypal.com&type=tcp
 vless://7b188eea-b08f-42c2-bac7-d3b0e74218b8@147.182.212.232:56565?security=reality&type=tcp&sni=www.paypal.com&fp=chrome&flow=xtls-rprx-vision&pbk=Td03Ae-cuYLq4xg7MSps58c_yRUcbbwtZLXm0ywabjY&allowInsecure=1
 vless://7b188eea-b08f-42c2-bac7-d3b0e74218b8@147.182.212.232:56565?security=reality&type=tcp&packetEncoding=xudp&sni=www.paypal.com&fp=chrome&flow=xtls-rprx-vision&pbk=Td03Ae-cuYLq4xg7MSps58c_yRUcbbwtZLXm0ywabjY
-vless://7b188eea-b08f-42c2-bac7-d3b0e74218b8@147.182.212.232:56565?type=tcp&flow=xtls-rprx-vision&sni=www.paypal.com&fp=chrome&security=reality&pbk=Td03Ae-cuYLq4xg7MSps58c_yRUcbbwtZLXm0ywabjY&sid=
 vless://7b188eea-b08f-42c2-bac7-d3b0e74218b8@147.182.212.232:56565?type=tcp&security=reality&sni=www.paypal.com&fp=chrome&alpn=http/1.1&pbk=Td03Ae-cuYLq4xg7MSps58c_yRUcbbwtZLXm0ywabjY&flow=xtls-rprx-vision&allowInsecure=1
 vless://7c053ca8-38cc-45e2-930c-eda1fd66f903@195.123.245.241:443?flow=xtls-rprx-vision&fp=firefox&pbk=hlY5ce1UsVIgE46y5PlEZhUsSaXUnCtoDLLaGrhInjw&security=reality&sid=23d0950d60bc0d5b&sni=gateway.icloud.com&type=tcp
 vless://7c053ca8-38cc-45e2-930c-eda1fd66f903@195.123.245.241:443?security=reality&type=tcp&packetEncoding=xudp&sni=gateway.icloud.com&fp=chrome&flow=xtls-rprx-vision&sid=23d0950d60bc0d5b&pbk=hlY5ce1UsVIgE46y5PlEZhUsSaXUnCtoDLLaGrhInjw
