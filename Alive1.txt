@@ -1,3 +1,6 @@
+vless://cda0862a-0f87-4be9-8ed8-1d0c9e382839@196.196.148.85:443?security=reality&pbk=l-GzBDuNuhnjxoRlZqKvT7jAt_sbVAxhGFsAttO5kXs&fp=chrome&type=tcp&sni=5d0319t.nl7.h1clayd.click&sid=361d0dd59c70516f
+vless://cda0862a-0f87-4be9-8ed8-1d0c9e382839@196.196.148.85:443?security=reality&type=tcp&packetEncoding=xudp&sni=5d0319t.nl7.h1clayd.click&fp=firefox&sid=361d0dd59c70516f&pbk=l-GzBDuNuhnjxoRlZqKvT7jAt_sbVAxhGFsAttO5kXs
+vless://cda0862a-0f87-4be9-8ed8-1d0c9e382839@196.196.148.85:443?security=reality&type=tcp&sni=5d0319t.nl7.h1clayd.click&fp=firefox&pbk=l-GzBDuNuhnjxoRlZqKvT7jAt_sbVAxhGFsAttO5kXs&sid=361d0dd59c70516f&allowInsecure=1
 vless://cdb7fa1d-6e7a-467c-da9c-da363c7bf779@147.224.54.25:2053?security=reality&pbk=DEFJSLdILrvauMpwtpvFZddadpt3rNtv03Dui2EkmRk&sid=68&fp=chrome&sni=www.cloudflare.com&type=tcp
 vless://cdb7fa1d-6e7a-467c-da9c-da363c7bf779@147.224.54.25:2053?security=reality&type=tcp&sni=www.cloudflare.com&fp=chrome&pbk=DEFJSLdILrvauMpwtpvFZddadpt3rNtv03Dui2EkmRk&sid=68&allowInsecure=1
 vless://7ad63b26-bf70-4872-8fab-ebaf73a1e19d@153.52.69.249:443?security=reality&pbk=WVfpQqoeOrTtCq052_IOxvMv7RCWfLlAOxEfsH1aa2U&fp=chrome&type=tcp&flow=xtls-rprx-vision&sni=cache-78.topp-con.xyz&sid=d5492c7a39515c65
