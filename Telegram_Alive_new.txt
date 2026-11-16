@@ -3,8 +3,6 @@ vless://00144519-7e0d-476b-8d28-435576af9262@167.17.69.171:443?security=reality&
 vless://04cbe9ea-9791-4195-827f-5d4cabbdba10@95.163.153.141:8443?fp=chrome&pbk=bRtDyXYrSK7YP6zKZGTUIVfNlpilQViJ4ih_43oSWnU&security=reality&sid=c9ea2355ddeab39b&sni=www.cloudflare.com&type=xhttp
 vless://056405e8-de9f-4d0d-8145-956f13cc34da@201.58.139.66:443?security=reality&type=tcp&sni=57aac2t.pl7.h1clayd.click&fp=chrome&pbk=LY0H47MWx87_L_JBzxFAuTzKZB53U7MrZQK8-dNnMxM&sid=6c5c7900406a1ae7&allowInsecure=1
 vless://0f11b72f-1af1-4f0a-b992-87a8241d9213@78.40.193.180:443?type=xhttp&security=reality&path=/assets/28ca4df9&sni=packages.gitlab.com&fp=chrome&pbk=FLewL4WGvCzo0NM2pGabhZVPlw0WKpNHIC9nksuoL30&sid=6969b2e2be858cb3
-vless://0f82d566-1273-43c5-a73c-229997b3b4b0@213.199.57.127:2087?flow=xtls-rprx-vision&fp=chrome&pbk=Y8U3PhV0K8jT4PBHq-rhCA4eUtOXa1CNB9waCvZbZSc&security=reality&sid=42&sni=blog.api.www.cloudflare.com&type=tcp
-vless://0f82d566-1273-43c5-a73c-229997b3b4b0@213.199.57.127:2087?security=reality&type=tcp&sni=blog.api.www.cloudflare.com&flow=xtls-rprx-vision&fp=chrome&pbk=Y8U3PhV0K8jT4PBHq-rhCA4eUtOXa1CNB9waCvZbZSc&sid=42&allowInsecure=1
 vless://11512726-b692-406f-ab49-7b28f44a8294@143.246.211.240:443?fp=firefox&host=fr.gorobsub.com&path=/ae1b809ceb77&pbk=_LNT4Kf7pPmeEBAnmJ7xsBu3y6Kih0Ew9AFVoDa3QSg&security=reality&sni=fr.gorobsub.com&type=xhttp
 vless://11512726-b692-406f-ab49-7b28f44a8294@143.246.211.240:443?fp=firefox&path=/ae1b809ceb77&pbk=_LNT4Kf7pPmeEBAnmJ7xsBu3y6Kih0Ew9AFVoDa3QSg&security=reality&sni=fr.gorobsub.com&type=xhttp
 vless://11512726-b692-406f-ab49-7b28f44a8294@143.246.211.240:443?security=reality&sni=fr.gorobsub.com&fp=chrome&pbk=_LNT4Kf7pPmeEBAnmJ7xsBu3y6Kih0Ew9AFVoDa3QSg&sid=3242cfd7&type=xhttp&path=/ae1b809ceb77
@@ -138,8 +136,6 @@ vless://52a5a29f-c162-411a-8a37-a3f11b0dc537@74.161.152.237:2083?security=realit
 vless://52a5a29f-c162-411a-8a37-a3f11b0dc537@74.161.152.237:2083?sni=www.apple.com&flow=xtls-rprx-vision&pbk=WbgtxLlo2gmTzB4Wzxgh_U7G97d4ENTS10fYIoujET4&fp=chrome&sid=0123456789abcdef&security=reality&type=tcp
 vless://52a5a29f-c162-411a-8a37-a3f11b0dc537@9.163.235.73:2083?flow=xtls-rprx-vision&security=reality&sni=www.apple.com&fp=chrome&pbk=WbgtxLlo2gmTzB4Wzxgh_U7G97d4ENTS10fYIoujET4&sid=0123456789abcdef&type=tcp
 vless://52a5a29f-c162-411a-8a37-a3f11b0dc537@9.163.235.73:2083?security=reality&type=tcp&sni=www.apple.com&fp=chrome&flow=xtls-rprx-vision&sid=0123456789abcdef&pbk=WbgtxLlo2gmTzB4Wzxgh_U7G97d4ENTS10fYIoujET4&allowInsecure=1
-vless://549766c3-fa5f-471e-8031-ffc1f8d5064f@217.60.27.93:443?fp=firefox&path=/v2/notes/85cf046cfe9c&pbk=2VsrxDroL0paeyBtGkQ5zfhMOXqwti5kDZPkvh1xJgs&security=reality&sid=8424ce89ccd55f65&sni=tgde.blog-forme.ru&type=xhttp
-vless://549766c3-fa5f-471e-8031-ffc1f8d5064f@217.60.27.93:443?security=reality&sni=tgde.blog-forme.ru&fp=chrome&pbk=2VsrxDroL0paeyBtGkQ5zfhMOXqwti5kDZPkvh1xJgs&sid=8424ce89ccd55f65&type=xhttp&mode=auto&path=/v2/notes/85cf046cfe9c
 vless://549766c3-fa5f-471e-8031-ffc1f8d5064f@5.35.44.218:8443?flow=xtls-rprx-vision&security=reality&sni=nl17.blog-forme.ru&fp=chrome&pbk=bxCIwojWO_edyWgi_QS-BOEnbX-prYu5B1hN_7Skgnc&sid=b6efdae4d829da97&type=tcp
 vless://549766c3-fa5f-471e-8031-ffc1f8d5064f@94.183.164.119:443?fp=firefox&path=/v2/notes/86cf7ba6ede1&pbk=31_G-lTr8GVS33I-ySfmMOXJ7SzpS48Ela7xXeT9D1Y&security=reality&sid=29f834cf893710f9&sni=tgnl2.blog-forme.ru&type=xhttp
 vless://549766c3-fa5f-471e-8031-ffc1f8d5064f@94.183.164.119:443?type=xhttp&security=reality&fp=chrome&pbk=31_G-lTr8GVS33I-ySfmMOXJ7SzpS48Ela7xXeT9D1Y&sid=29f834cf893710f9&sni=tgnl2.blog-forme.ru&path=/v2/notes/86cf7ba6ede1&host=tgnl2.blog-forme.ru
@@ -422,7 +418,6 @@ vless://ba52cc43-700d-4040-9444-29214c98e6e0@213.176.92.168:10444?security=reali
 vless://baded307-189c-4ffc-a271-9acdab51a324@91.107.255.63:39653?security=tls&alpn=h2,http/1.1&type=tcp&sni=online.shop.ir.eeso.cc
 vless://baded307-189c-4ffc-a271-9acdab51a324@91.107.255.63:39653?security=tls&type=tcp&sni=online.shop.ir.eeso.cc&alpn=h2,http/1.1&allowInsecure=1
 vless://baded307-189c-4ffc-a271-9acdab51a324@91.107.255.63:39653?type=tcp&security=tls&sni=online.shop.ir.eeso.cc&allowInsecure=1
-vless://bcdb425f-80bc-4ec8-92a5-8edf53639c01@207.148.124.12:8443?security=tls&type=tcp&sni=www.bing.com&allowInsecure=1
 vless://bd6c11e0-0233-4fb1-ba97-8d5f16d7155f@91.107.188.129:2083?type=ws&security=tls&sni=site.check-looks.space
 vless://bdde0eb9-62c6-4d30-ac96-ab10d8eb7939@104.26.1.117:443?security=tls&sni=erupencompanypdr.pages.dev&type=ws&path=/ISoOMY675XVPxHG4&ed=2560
 vless://bdde0eb9-62c6-4d30-ac96-ab10d8eb7939@104.26.1.117:443?security=tls&sni=erupencompanypdr.pages.dev&type=ws&path=/ISoOMY675XVPxHG4&fp=ios&ed=2560

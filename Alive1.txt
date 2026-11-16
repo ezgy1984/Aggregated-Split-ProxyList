@@ -1,3 +1,8 @@
+vless://549766c3-fa5f-471e-8031-ffc1f8d5064f@217.60.27.93:443?fp=firefox&path=/v2/notes/85cf046cfe9c&pbk=2VsrxDroL0paeyBtGkQ5zfhMOXqwti5kDZPkvh1xJgs&security=reality&sid=8424ce89ccd55f65&sni=tgde.blog-forme.ru&type=xhttp
+vless://549766c3-fa5f-471e-8031-ffc1f8d5064f@217.60.27.93:443?security=reality&sni=tgde.blog-forme.ru&fp=chrome&pbk=2VsrxDroL0paeyBtGkQ5zfhMOXqwti5kDZPkvh1xJgs&sid=8424ce89ccd55f65&type=xhttp&mode=auto&path=/v2/notes/85cf046cfe9c
+vless://bcdb425f-80bc-4ec8-92a5-8edf53639c01@207.148.124.12:8443?security=tls&type=tcp&sni=www.bing.com&allowInsecure=1
+vless://0f82d566-1273-43c5-a73c-229997b3b4b0@213.199.57.127:2087?flow=xtls-rprx-vision&fp=chrome&pbk=Y8U3PhV0K8jT4PBHq-rhCA4eUtOXa1CNB9waCvZbZSc&security=reality&sid=42&sni=blog.api.www.cloudflare.com&type=tcp
+vless://0f82d566-1273-43c5-a73c-229997b3b4b0@213.199.57.127:2087?security=reality&type=tcp&sni=blog.api.www.cloudflare.com&flow=xtls-rprx-vision&fp=chrome&pbk=Y8U3PhV0K8jT4PBHq-rhCA4eUtOXa1CNB9waCvZbZSc&sid=42&allowInsecure=1
 vless://c1208c5a-2350-0003-affd-fc41b4319286@188.114.99.137:443?type=ws&security=tls&sni=decdn-28.nome-rkp.net&fp=firefox&path=/media/ws/
 vless://c1208c5a-2350-0003-affd-fc41b4319286@85.234.100.32:443?security=tls&type=ws&sni=decdn-28.nome-rkp.net&path=/media/ws/&allowInsecure=1
 vless://99c5b713-dedf-4a10-8070-916ff3f49b0e@188.114.99.137:8443?security=tls&type=ws&sni=fs.qicai99.com
