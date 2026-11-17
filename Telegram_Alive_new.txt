@@ -411,7 +411,6 @@ vless://ba52cc43-700d-4040-9444-29214c98e6e0@213.176.92.168:10444?security=reali
 vless://baded307-189c-4ffc-a271-9acdab51a324@91.107.255.63:39653?security=tls&alpn=h2,http/1.1&type=tcp&sni=online.shop.ir.eeso.cc
 vless://baded307-189c-4ffc-a271-9acdab51a324@91.107.255.63:39653?security=tls&type=tcp&sni=online.shop.ir.eeso.cc&alpn=h2,http/1.1&allowInsecure=1
 vless://baded307-189c-4ffc-a271-9acdab51a324@91.107.255.63:39653?type=tcp&security=tls&sni=online.shop.ir.eeso.cc&allowInsecure=1
-vless://bd6c11e0-0233-4fb1-ba97-8d5f16d7155f@91.107.188.129:2083?type=ws&security=tls&sni=site.check-looks.space
 vless://bdde0eb9-62c6-4d30-ac96-ab10d8eb7939@104.26.1.117:443?security=tls&sni=erupencompanypdr.pages.dev&type=ws&path=/ISoOMY675XVPxHG4&ed=2560
 vless://bdde0eb9-62c6-4d30-ac96-ab10d8eb7939@104.26.1.117:443?security=tls&sni=erupencompanypdr.pages.dev&type=ws&path=/ISoOMY675XVPxHG4&fp=ios&ed=2560
 vless://bdde0eb9-62c6-4d30-ac96-ab10d8eb7939@104.26.1.117:443?security=tls&sni=erupencompanypdr.pages.dev&type=ws&path=/ISoOMY675XVPxHG4&fp=safari&ed=2560
