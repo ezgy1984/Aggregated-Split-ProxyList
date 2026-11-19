@@ -577,10 +577,6 @@ hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.29:443?sni=https%253a%252f%252ft.me%2
 hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.29:443?sni=https3a2f2ft.me2fwangcai2efa3bfc3bcc3a1
 hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.29:443?sni=https://t.me/wangcai2ôøωôøωôøωôøω&allow_insecure=1
 hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.29:443?sni=off&allow_insecure=1
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.54:443?insecure=1&hop_interval=10&sni=vpn-hk-004.fastervpn.world
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.54:443?insecure=1&sni=vpn-hk-004.fastervpn.world
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.54:443?sni=vpn-hk-004.fastervpn.world
-hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.54:443?sni=vpn-hk-004.fastervpn.world&insecure=true&alpn=h3
 hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.89:443
 hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.89:443?insecure=1
 hy2://H7mP2xY9kJ4nQ8wR5tF6vB3z@202.146.222.89:443?insecure=1&hop_interval=10&sni=202.146.222.89
