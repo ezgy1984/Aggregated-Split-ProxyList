@@ -1,0 +1,10 @@
+vmess://6f7c2f34-9b1a-4e88-bd2c-0a5f31c9e7d2@cdn.example.net:443?encryption=none&security=tls&type=ws&host=cdn.example.net&path=%2Fwsvless&sni=cdn.example.net&fp=chrome&alpn=h2,http/1.1#vmess-ws-tls-cdn
+vmess://a1b2c3d4-0000-4aaa-8bbb-123456789abc@nl2.proxy.example.org:8443?encryption=none&security=tls&type=grpc&serviceName=grpcsvc&sni=nl2.proxy.example.org&fp=firefox#vmess-grpc
+vmess://e5f6a7b8-c9d0-4111-9222-334455667788@45.132.19.8:2053?encryption=none&security=tls&type=tcp&headerType=http&host=static.example.com&path=%2Ftj&sni=static.example.com#vmess-tcp-httpobfs
+vmess://0d1e2f3a-4b5c-4d6e-8f90-a1b2c3d4e5f6@85.90.201.14:10086?encryption=none&type=tcp#vmess-plain-tcp
+vmess://11223344-5566-4777-8999-aabbccddeeff@sg-node.example.io:443?encryption=none&security=tls&type=ws&host=sg-node.example.io&path=%2Fray%3Fed%3D2554&sni=sg-node.example.io&alpn=h2#vmess-ws-singapore
+vmess://deadbeef-cafe-4bab-9f0d-1234abcd5678@de.example-vpn.de:2096?encryption=none&security=tls&type=httpupgrade&host=de.example-vpn.de&path=%2Fupgrade&sni=de.example-vpn.de#vmess-httpupgrade
+vmess://f0e1d2c3-b4a5-4968-8776-665544332211@helsinki.example.fi:443?encryption=none&security=tls&type=h2&host=cdn.example.fi&path=%2Fh2chat&sni=helsinki.example.fi#vmess-h2
+vmess://77aa88bb-99cc-4d00-8e11-f22334455666@192.168-style.example.tk:80?encryption=none&type=ws&path=%2Ffree&host=freecdn.example.tk#vmess-ws-notls
+vmess://3c4d5e6f-7081-4293-a4b5-c6d7e8f90123@tokyo.example.jp:443?encryption=none&security=tls&type=xhttp&host=xcdn.example.jp&path=%2Fxhttp&sni=xcdn.example.jp&fp=chrome&mode=auto#vmess-xhttp
+vmess://99998888-7777-4666-8555-444433332211@tr.example-tr.net:8443?encryption=none&security=tls&type=grpc&serviceName=trojan-grpc&sni=tr.example-tr.net&fp=chrome&scy=chacha20-poly1305&aid=1#vmess-grpc-scy-aid
