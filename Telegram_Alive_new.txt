@@ -90,7 +90,6 @@ vless://3659f248-1797-4d6e-9982-a308565fec79@95.85.234.66:443?flow=xtls-rprx-vis
 vless://3692de53-42e6-4aed-a522-40ec355dcd2f@104.27.97.42:8443?security=tls&alpn=http/1.1&type=ws&sni=free.sahanwickramasinghe.com&fp=firefox#🛡🌐 104.27.97.42:8443🍩
 vless://36a1c787-fb9e-4fea-ba54-5cb33255d4de@45.145.43.151:443?flow=xtls-rprx-vision&fp=chrome&pbk=bzv2S23383rd8Ega-o_QrY4PypA6hEA3PrwWWI6LEnQ&security=reality&sid=d4943b89d83cb97d&sni=freetg.ghost-service.cc&type=tcp#🛡🇩🇪 45.145.43.151:443📷
 vless://36a1c787-fb9e-4fea-ba54-5cb33255d4de@45.145.43.151:9443?security=tls&sni=freetg.ghost-service.cc&type=ws&path=/live.stream.v1.Broadcast/#🛡🇩🇪 45.145.43.151:9443🎉
-vless://37af0181-5598-4aad-a040-d926bcb65757@78.159.240.72:8443?host=plaindune.com&mode=auto&path=%2Fapi%2Fv1%2Fupload&security=tls&sni=plaindune.com&type=xhttp#🛡🇷🇺 78.159.240.72:8443🐮
 vless://38308ff1-5aa9-494f-a25a-0f2870d56b3e@200.169.179.233:443?type=grpc&security=tls&fp=ios&sni=vps3.nemnogogo.com&serviceName=mobile.api.Event#🛡🇷🇺 200.169.179.233:443⛰️
 vless://38308ff1-5aa9-494f-a25a-0f2870d56b3e@201.24.116.192:443?security=tls&type=grpc&sni=vps3.nemnogogo.com&serviceName=mobile.api.Event&allowInsecure=1#🛡🇷🇺 201.24.116.192:443🌈
 vless://38308ff1-5aa9-494f-a25a-0f2870d56b3e@201.51.12.98:443?alpn=h2&security=tls&serviceName=mobile.api.Event&sni=vps3.nemnogogo.com&type=grpc&fp=edge#🛡🇷🇺 201.51.12.98:443🐝
@@ -151,7 +150,6 @@ vless://59548d2d-5d7c-4328-aa81-0d5614da0c1b@198.247.127.131:443?security=realit
 vless://5ad13ef8-ced8-43b5-9d8c-f046a3ce9ddc@185.103.100.211:443?security=reality&pbk=sRmbdpwZ5gtUVEu1BMXE71DRHDWhBLCoLh6QiFazm2U&sid=1b2a3f&sni=msk2e.g-magnum.icu&fp=chrome&type=tcp&flow=xtls-rprx-vision#🛡🇷🇺 185.103.100.211:443👟
 vless://5ad13ef8-ced8-43b5-9d8c-f046a3ce9ddc@213.226.127.71:2066?security=reality&pbk=kLCwYNBhCg68BQah9El1lNg6GQ7-7Y7xfTtIs6MiTEg&sid=d18f4e&sni=tiktok.com&fp=chrome&type=tcp&flow=xtls-rprx-vision#🛡🇷🇺 213.226.127.71:2066🥑
 vless://5d7b401c-78fa-4254-872e-6d42bf7e75ec@162.159.130.234:443?security=tls&type=ws&path=%2Fstar%2Ftopics%2Fblogs&packetEncoding=xudp&sni=v1n4.11676767.xyz#🛡🇺🇸 162.159.130.234:443🍥
-vless://5d98ff1a-d576-46d3-9504-b158d94bcce9@143.246.195.157:8448?flow=xtls-rprx-vision&pbk=ZrfnJpQfBnWiNjELJL9kDi1pNa2hrVyosu8a0sjE9WQ&security=reality&sid=2355ffa16d2b04a2&sni=www.telia.se&type=tcp&fp=chrome#🛡🇸🇪 143.246.195.157:8448✏️
 vless://5d98ff1a-d576-46d3-9504-b158d94bcce9@195.63.143.129:8446?flow=xtls-rprx-vision&fp=firefox&pbk=UzS81axpyoGU0UUzsWPMBi1cdAxo5hyfLkqB9wy9HkI&security=reality&sid=ec685991deb623f7&sni=www.kpn.com&type=tcp#🛡🇳🇱 195.63.143.129:8446⛲
 vless://6050b89e-8da4-47b7-973b-9baf0027754f@217.150.197.10:443?flow=xtls-rprx-vision&fp=firefox&pbk=NjbnmsosFJHk-7LJei0QOWDI4f7Db2lO6rsdJ0wfHlE&security=reality&sid=9654e54cf3aaa5bb&sni=community-bd.paruscamp.com&type=tcp#🛡🇷🇺 217.150.197.10:443💰
 vless://62995b2a-8f82-41f8-ac80-dfdfc1253e76@136.148.221.153:25191?security=reality&sni=a8687er.se2.h1clayd.click&fp=firefox&pbk=_Cb2FzFDVi9blwCb_5V0NZue6wt-U6GL0N_-OX8NGGA&sid=55328e423218ee9b&type=xhttp&path=%2Fastral-edge-h1&mode=auto#🛡🇸🇪 136.148.221.153:25191🌋
