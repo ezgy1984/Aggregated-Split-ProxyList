@@ -1,1 +1,2 @@
+vless://24bc6f99-bb3c-405b-9f99-e27c5012cf45@85.189.89.182:20086?flow=xtls-rprx-vision&fp=chrome&pbk=p6xwBXTFkq8nzeO8zjPTSHANvS2DfstuG-Vp134hBGs&security=reality&sni=aws.amazon.com&type=tcp#🛡🇬🇧 85.189.89.182:20086🍤
 vless://ab53f3b6-7962-4bc1-90f6-8420767b22a8@82.148.241.246:8443?type=xhttp&security=reality&fp=firefox&pbk=dSH20qQm9nyDIN1gI1KyUjtVOilHh0wG8t-Xw1iz638&sid=01f0a0809d05552b&sni=cdn-es.cahmes.space&path=%2Fxhttp&mode=stream-one#🛡🇬🇧 82.148.241.246:8443🥥
